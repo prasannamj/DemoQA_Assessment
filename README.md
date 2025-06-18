@@ -39,7 +39,7 @@ Internet connection (for WebDriverManager)
 
 Execution workflow
 ------------------
-Clone the repository = >git clone https://github.com/prasannamj/FlipKart_Assessment.git
+Clone the repository = >git clone https://github.com/prasannamj/DemoQA_Assessment.git
 cd FlipKart_Assessment
 
 Install dependencies => mvn clean install
