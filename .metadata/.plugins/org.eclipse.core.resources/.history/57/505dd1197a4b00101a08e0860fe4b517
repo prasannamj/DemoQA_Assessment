@@ -1,0 +1,174 @@
+package com.DemoQA.testCases;
+
+
+import java.time.Duration;
+import java.util.Set;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import com.DemoQA.pageObjects.DemoQAPage;
+
+
+
+public class DemoQATest extends BaseClass {
+//	WebDriver driver;
+    DemoQAPage QA;
+	
+
+
+//	@Test(priority = 0)
+	public void HandleNestedFrame() throws Exception
+	{
+		QA = new DemoQAPage(driver);
+		logger = extent.createTest("Demo QA NestedFrame");
+		
+		driver.navigate().to("https://demoqa.com/nestedframes");
+		
+		Thread.sleep(5000);
+		
+		driver.switchTo().frame("frame1"); 
+		
+		driver.switchTo().frame(0); 
+
+		 String childFrameText = driver.findElement(By.tagName("body")).getText();
+		 String ExpectedFrameText = "Child Iframe";
+		 System.out.println("Text in child frame: " + childFrameText);
+		 
+		 if(childFrameText.equalsIgnoreCase(ExpectedFrameText))
+	        {
+				logger.createNode("Verify Child Frame Text").pass("Childframe text retrived Sucessfully").info("childFrameText : "+ childFrameText).info("ExpectedFrameText : "+ExpectedFrameText);
+
+	        }
+	        else
+	        {
+				logger.createNode("Verify Child Frame Text").fail("failed to retrive Child frame text").info("childFrameText : "+ childFrameText).info("ExpectedFrameText : "+ExpectedFrameText);;
+
+	        }
+		 
+		 driver.switchTo().defaultContent();
+
+
+	}
+	
+//	@Test(priority = 1)
+	public void HandleAlerts() throws Exception
+	{
+		QA = new DemoQAPage(driver);
+		
+		logger = extent.createTest("Demo QA Alerts");
+
+		driver.navigate().to("https://demoqa.com/alerts");
+
+		
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0, 400);"); 
+	        //Handle Simple Alert
+	        QA.click_FirstAlert();
+	        Alert simple_Alert = driver.switchTo().alert();
+	        System.out.println("Simple Alert Text: " + simple_Alert.getText());
+	        simple_Alert.accept();
+			logger.createNode("Verify simple_Alert").pass("Alert handled Sucessfully");
+	        
+		
+
+	        //Handle Timed Alert (after 5 seconds)
+	        QA.click_SecondAlert();
+	        wait.until(ExpectedConditions.alertIsPresent());
+	        Alert timed_Alert = driver.switchTo().alert();
+	        System.out.println("Timed Alert Text: " + timed_Alert.getText());
+	        timed_Alert.accept();
+			logger.createNode("Verify timed_Alert").pass("Alert handled Sucessfully");
+
+
+
+	        //Handle Confirm Alert (OK / Cancel)
+	        QA.click_ThirdAlert();
+	        Alert confirm_Alert = driver.switchTo().alert();
+	        System.out.println("Confirm Alert Text: " + confirm_Alert.getText());
+	        confirm_Alert.dismiss();
+	        
+	        String Expectedresult = "You selected Cancel";
+	        
+	        if(QA.Get_Confirmation_Text().equalsIgnoreCase(Expectedresult))
+	        {
+				logger.createNode("Verify confirm_Alert").pass("Alert handled Sucessfully").info("acutal text : "+ QA.Get_Confirmation_Text()).info("Expected Text : "+Expectedresult);
+
+	        }
+	        else
+	        {
+				logger.createNode("Verify confirm_Alert").fail("Alert handle failed").info("acutal text : "+ QA.Get_Confirmation_Text()).info("Expected Text : "+Expectedresult);
+
+	        }
+	        
+
+
+	        //Handle Prompt Alert (with text input)
+	        QA.click_ForthAlert();
+	        Alert prompt_Alert = driver.switchTo().alert();
+	        System.out.println("Prompt Alert Text: " + prompt_Alert.getText());
+	        String text = "Demo QA Automation";
+	        String Expected_result = "You entered "+text;
+	        prompt_Alert.sendKeys(text);
+	        prompt_Alert.accept();
+	        
+	        
+	        if(QA.Get_promptResult_Text().equalsIgnoreCase("You entered "+text))
+	        {
+				logger.createNode("Verify prompt_Alert").pass("Alert handled Sucessfully").info("acutal text : "+ QA.Get_promptResult_Text()).info("Expected Text : "+Expected_result);
+
+	        }
+	        else
+	        {
+				logger.createNode("Verify prompt_Alert").fail("Alert handle failed").info("acutal text : "+ QA.Get_Confirmation_Text()).info("Expected Text : "+Expected_result);
+
+	        }
+	        
+	}
+	
+	
+
+	@Test(priority = 2)
+	public void Handledroppable() throws Exception
+	{
+		QA = new DemoQAPage(driver);	
+		
+		logger = extent.createTest("Demo QA droppable");
+
+		driver.navigate().to("https://demoqa.com/droppable");
+		
+
+        JavascriptExecutor jsAction = (JavascriptExecutor) driver;
+        jsAction.executeScript("window.scrollBy(0, 400);"); 
+		
+		QA.click_Accept_tab();
+		
+
+	        Actions actions = new Actions(driver);
+
+	        
+	        actions.dragAndDrop(QA.get_source(), QA.get_target()).build().perform();
+
+	        // Optional: Verify if drop was successful
+	        String text = QA.get_target().getText();
+	        System.out.println(text);
+	        if(text.equals("Drop here")) {
+				logger.createNode("Verify Drag & drop").pass("Drag and drop Sucessfully");
+	        } else {
+				logger.createNode("Verify Drag & drop").fail("Drag and drop Failed");
+	        }
+	
+	}
+}
+
+

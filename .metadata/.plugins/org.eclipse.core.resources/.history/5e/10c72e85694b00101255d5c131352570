@@ -1,0 +1,64 @@
+package com.DemoQA.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class DemoQAPage {
+	
+
+    private WebDriver driver;
+
+    // Constructor initializes WebDriver instance and elements
+    public DemoQAPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    
+    
+    public By FirstAlert = By.id("alertButton");
+    public By SecondAlert = By.id("timerAlertButton");
+    public By ThirdAlert = By.id("confirmButton");
+    public By ForthAlert = By.id("promtButton");
+
+    public By confirmResult = By.id("confirmResult");
+    
+	public WebElement First_Alert = driver.findElement(FirstAlert);	
+	public WebElement Second_Alert = driver.findElement(SecondAlert);	
+	public WebElement Third_Alert = driver.findElement(ThirdAlert);	
+	public WebElement Forth_Alert = driver.findElement(ForthAlert);	
+
+    
+
+	
+	public void click_FirstAlert()
+	{
+		First_Alert.click();
+	}
+	
+	public void click_SecondAlert()
+	{
+		Second_Alert.click();
+	}
+	public void click_ThirdAlert()
+	{
+		Third_Alert.click();
+	}
+	public void click_ForthAlert()
+	{
+		Forth_Alert.click();
+	}
+	
+	public String Get_Confirmation_Text()
+	{
+		WebElement confirm_Result = driver.findElement(confirmResult);	
+		return confirm_Result.getText();
+	}
+	
+	
+		
+	
+}

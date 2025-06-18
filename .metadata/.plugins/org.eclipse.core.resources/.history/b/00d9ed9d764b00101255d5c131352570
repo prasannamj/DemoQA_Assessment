@@ -1,0 +1,83 @@
+package com.DemoQA.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class DemoQAPage {
+	
+
+    private WebDriver driver;
+
+    // Constructor initializes WebDriver instance and elements
+    public DemoQAPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    
+    
+    public By FirstAlert = By.id("alertButton");
+    public By SecondAlert = By.id("timerAlertButton");
+    public By ThirdAlert = By.id("confirmButton");
+    public By ForthAlert = By.id("promtButton");
+
+    public By confirmResult = By.id("confirmResult");
+    public By promptResult = By.id("promptResult");
+    
+    
+    public By Accept = By.id("droppableExample-tab-accept");
+    
+	 public WebElement AcceptEle = driver.findElement(Accept);
+    
+	 public WebElement source = driver.findElement(By.id("notAcceptable"));
+	 public WebElement target = driver.findElement(By.id("droppable"));
+
+    
+   
+	public void click_FirstAlert()
+	{
+		WebElement First_Alert = driver.findElement(FirstAlert);	
+		First_Alert.click();
+	}
+	
+	public void click_SecondAlert()
+	{
+		WebElement Second_Alert = driver.findElement(SecondAlert);	
+		Second_Alert.click();
+	}
+	public void click_ThirdAlert()
+	{
+		WebElement Third_Alert = driver.findElement(ThirdAlert);	
+		Third_Alert.click();
+	}
+	public void click_ForthAlert()
+	{
+		WebElement Forth_Alert = driver.findElement(ForthAlert);	
+		Forth_Alert.click();
+	}
+	
+	public String Get_Confirmation_Text()
+	{
+		WebElement confirm_Result = driver.findElement(confirmResult);	
+		return confirm_Result.getText();
+	}
+	
+	
+	public String Get_promptResult_Text()
+	{
+		WebElement prompt_Result = driver.findElement(promptResult);	
+		return prompt_Result.getText();
+	}
+	
+	
+	public void click_Accept_tab()
+	{
+		Accept.click();
+	}
+	
+		
+	
+}

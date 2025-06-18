@@ -1,0 +1,63 @@
+package com.DemoQA.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class DemoQAPage {
+	
+
+    private WebDriver driver;
+
+    // Constructor initializes WebDriver instance and elements
+    public DemoQAPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    
+    
+    public By FirstAlert = By.xpath("(//*[text()='Click me'])[1]");
+    public By SecondAlert = By.xpath("(//*[text()='Click me'])[2]");
+    public By ThirdAlert = By.xpath("(//*[text()='Click me'])[3]");
+    public By ForthAlert = By.xpath("(//*[text()='Click me'])[4]");
+
+    public By confirmResult = By.id("confirmResult");
+    
+    
+
+	
+	public void click_FirstAlert()
+	{
+		WebElement First_Alert = driver.findElement(FirstAlert);	
+		First_Alert.click();
+	}
+	
+	public void click_SecondAlert()
+	{
+		WebElement Second_Alert = driver.findElement(SecondAlert);	
+		Second_Alert.click();
+	}
+	public void click_ThirdAlert()
+	{
+		WebElement Third_Alert = driver.findElement(ThirdAlert);	
+		Third_Alert.click();
+	}
+	public void click_ForthAlert()
+	{
+		WebElement Forth_Alert = driver.findElement(ForthAlert);	
+		Forth_Alert.click();
+	}
+	
+	public String Get_Confirmation_Text()
+	{
+		WebElement confirm_Result = driver.findElement(confirmResult);	
+		return confirm_Result.getText();
+	}
+	
+	
+		
+	
+}

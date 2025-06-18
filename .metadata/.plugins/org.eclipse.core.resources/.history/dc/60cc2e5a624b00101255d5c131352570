@@ -1,0 +1,87 @@
+package com.DemoQA.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class DemoQAPage {
+	
+
+    private WebDriver driver;
+
+    // Constructor initializes WebDriver instance and elements
+    public DemoQAPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    
+    
+    public By FirstAlert = By.id("alertButton");
+    public By SecondAlert = By.id("timerAlertButton");
+    public By ThirdAlert = By.id("confirmButton");
+    public By ForthAlert = By.id("promtButton");
+
+    
+    
+    
+    public By Kids = By.xpath("//a[text() = 'Kids']");
+    
+    public By Boys_Girls_Jeans = By.xpath("//a[text() = 'Boys & Girls Jeans']");
+    
+    public By Price_Low_to_high_Sort = By.xpath("//*[text()='Price -- Low to High']");
+
+	
+	public void MouseHoverOnFashionSection() 
+	{
+	
+		WebElement fashion = driver.findElement(FashionSection);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(fashion).perform();
+	}
+
+	
+	public void click_FirstAlert()
+	{
+		WebElement First_Alert = driver.findElement(FirstAlert);	
+		First_Alert.click();
+	}
+	
+	public void click_SecondAlert()
+	{
+		WebElement Second_Alert = driver.findElement(SecondAlert);	
+		Second_Alert.click();
+	}
+	public void click_ThirdAlert()
+	{
+		WebElement Third_Alert = driver.findElement(ThirdAlert);	
+		Third_Alert.click();
+	}
+	public void click_ForthAlert()
+	{
+		WebElement Forth_Alert = driver.findElement(ForthAlert);	
+		Forth_Alert.click();
+	}
+	
+	
+	
+	public String Get_cart_Item_price()
+	{
+		WebElement Kart_Item_price= driver.findElement(cart_Item_price);
+		String itemPrice = Kart_Item_price.getText();
+		return itemPrice;	
+	}
+	
+	public boolean cart_Item_price_isDisplayed()
+	{
+		WebElement FirstItem= driver.findElement(cart_Item_price);
+		boolean isdisplayed = FirstItem.isDisplayed();
+		return isdisplayed;
+		
+	}
+	
+	
+	
+}
